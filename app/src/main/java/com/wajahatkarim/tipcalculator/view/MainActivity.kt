@@ -1,25 +1,27 @@
 package com.wajahatkarim.tipcalculator.view
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.wajahatkarim.tipcalculator.R
+import com.wajahatkarim.tipcalculator.databinding.ActivityMainBinding
+import com.wajahatkarim.tipcalculator.viewmodel.CalculatorViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var bi: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        bi = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        bi.vm = CalculatorViewModel(application)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

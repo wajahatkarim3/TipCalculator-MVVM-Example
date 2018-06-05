@@ -1,14 +1,31 @@
 package com.wajahatkarim.tipcalculator.viewmodel
 
+import android.app.Application
+import android.databinding.BaseObservable
+import com.wajahatkarim.tipcalculator.R
 import com.wajahatkarim.tipcalculator.model.RestaurantCalculator
 import com.wajahatkarim.tipcalculator.model.TipCalculation
 
-class CalculatorViewModel(val calculator: RestaurantCalculator = RestaurantCalculator()) {
+class CalculatorViewModel(val app: Application, val calculator: RestaurantCalculator = RestaurantCalculator()) : BaseObservable()
+{
 
     var txtCheckAmount = ""
     var txtTipPercentage = ""
 
-    var tipCalculation = TipCalculation()
+    var txtBillPayment = ""
+    var txtTipAmount = ""
+    var txtGrandTotal = ""
+
+    init {
+        updateOutputs(TipCalculation())
+    }
+
+    private fun updateOutputs(tc: TipCalculation)
+    {
+        txtBillPayment = app.getString(R.string.dollar_amount, tc.checkAmount)
+        txtTipAmount = app.getString(R.string.dollar_amount, tc.tipAmount)
+        txtGrandTotal = app.getString(R.string.dollar_amount, tc.grandTotal)
+    }
 
     fun calculateTip()
     {
@@ -17,7 +34,15 @@ class CalculatorViewModel(val calculator: RestaurantCalculator = RestaurantCalcu
 
         if (checkAmount != null && tipPct != null)
         {
-            tipCalculation = calculator.calculateTip(checkAmount, tipPct)
+            updateOutputs(calculator.calculateTip(checkAmount, tipPct))
+            clearInputs()
         }
+    }
+
+    fun clearInputs()
+    {
+        txtCheckAmount = "0.00"
+        txtTipPercentage = "0"
+        notifyChange()
     }
 }
