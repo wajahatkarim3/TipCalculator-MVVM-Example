@@ -8,13 +8,14 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.wajahatkarim.tipcalculator.R
 import com.wajahatkarim.tipcalculator.databinding.ActivityMainBinding
 import com.wajahatkarim.tipcalculator.viewmodel.CalculatorViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
 
     lateinit var bi: ActivityMainBinding
 
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         //bi.vm = CalculatorViewModel(application)
         bi.vm = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+    }
+
+    override fun onSaveTip(name: String) {
+        Snackbar.make(bi.root, "Saved $name", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -38,8 +43,17 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_save -> {
+                showSaveDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun showSaveDialog()
+    {
+        val saveDialogFragment = SaveDialogFragment()
+        saveDialogFragment.show(supportFragmentManager, "SaveDialog")
     }
 }
