@@ -6,9 +6,8 @@ import com.wajahatkarim.tipcalculator.R
 import com.wajahatkarim.tipcalculator.model.RestaurantCalculator
 import com.wajahatkarim.tipcalculator.model.TipCalculation
 
-class CalculatorViewModel(val app: Application, val calculator: RestaurantCalculator = RestaurantCalculator()) : BaseObservable()
+class CalculatorViewModel @JvmOverloads constructor(app: Application, val calculator: RestaurantCalculator = RestaurantCalculator()) : ObservableViewModel(app)
 {
-
     var txtCheckAmount = ""
     var txtTipPercentage = ""
 
@@ -22,9 +21,9 @@ class CalculatorViewModel(val app: Application, val calculator: RestaurantCalcul
 
     private fun updateOutputs(tc: TipCalculation)
     {
-        txtBillPayment = app.getString(R.string.dollar_amount, tc.checkAmount)
-        txtTipAmount = app.getString(R.string.dollar_amount, tc.tipAmount)
-        txtGrandTotal = app.getString(R.string.dollar_amount, tc.grandTotal)
+        txtBillPayment = getApplication<Application>().getString(R.string.dollar_amount, tc.checkAmount)
+        txtTipAmount = getApplication<Application>().getString(R.string.dollar_amount, tc.tipAmount)
+        txtGrandTotal = getApplication<Application>().getString(R.string.dollar_amount, tc.grandTotal)
     }
 
     fun calculateTip()
