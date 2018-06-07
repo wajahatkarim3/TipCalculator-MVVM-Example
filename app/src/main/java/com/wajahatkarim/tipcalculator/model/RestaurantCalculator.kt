@@ -1,8 +1,9 @@
 package com.wajahatkarim.tipcalculator.model
 
+import android.arch.lifecycle.LiveData
 import java.math.RoundingMode
 
-class RestaurantCalculator
+class RestaurantCalculator(val repository: TipCalculationRepository = TipCalculationRepository())
 {
     fun calculateTip(checkInput: Double, tipPctInput: Int): TipCalculation {
 
@@ -21,4 +22,18 @@ class RestaurantCalculator
         )
     }
 
+    fun saveTipCalculation(tc: TipCalculation)
+    {
+        repository.saveTipCalculation(tc)
+    }
+
+    fun loadTipCalculationByName(locationName: String) : TipCalculation?
+    {
+        return repository.getTipCalculationByName(locationName)
+    }
+
+    fun loadSavedTipCalculations() : LiveData<List<TipCalculation>>
+    {
+        return repository.loadSavedTipCalculations()
+    }
 }
