@@ -18,7 +18,7 @@ class SaveDialogFragment : DialogFragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        saveTipCallback = this as? Callback
+        saveTipCallback = context as? Callback
     }
 
     override fun onDetach() {

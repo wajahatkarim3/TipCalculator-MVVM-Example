@@ -15,7 +15,7 @@ import com.wajahatkarim.tipcalculator.viewmodel.CalculatorViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
+class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback, LoadDialogFragment.Callback {
 
     lateinit var bi: ActivityMainBinding
 
@@ -29,7 +29,13 @@ class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
     }
 
     override fun onSaveTip(name: String) {
+        bi.vm?.saveCurrentTip(name)
         Snackbar.make(bi.root, "Saved $name", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onTipSelected(name: String) {
+        bi.vm?.loadTipCalculation(name)
+        Snackbar.make(bi.root, "Loaded $name", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

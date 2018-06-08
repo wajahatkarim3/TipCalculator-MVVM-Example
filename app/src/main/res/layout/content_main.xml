@@ -32,7 +32,7 @@
                 android:id="@+id/txtCheckAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={vm.txtCheckAmount}"
+                android:text="@={vm.inputCheckAmount}"
                 android:hint="Check"
                 android:inputType="numberDecimal"
                 android:selectAllOnFocus="true" />
@@ -52,7 +52,7 @@
                 android:id="@+id/txtTipPercentage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={vm.txtTipPercentage}"
+                android:text="@={vm.inputTipPercentage}"
                 android:hint="Tip Percentage"
                 android:inputType="number"
                 android:selectAllOnFocus="true" />
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="@{vm.txtBillPayment}"
+                    android:text="@{vm.outputCheckAmount}"
                     style="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
@@ -104,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="@{vm.txtTipAmount}"
+                    android:text="@{vm.outputTipAmount}"
                     style="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
@@ -126,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="@{vm.txtGrandTotal}"
+                    android:text="@{vm.outputTotalDollarAmount}"
                     style="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
