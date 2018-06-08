@@ -47,6 +47,10 @@ class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
                 showSaveDialog()
                 true
             }
+            R.id.action_load -> {
+                showLoadDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -55,5 +59,11 @@ class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
     {
         val saveDialogFragment = SaveDialogFragment()
         saveDialogFragment.show(supportFragmentManager, "SaveDialog")
+    }
+
+    fun showLoadDialog()
+    {
+        val saveDialogFragment = LoadDialogFragment()
+        saveDialogFragment.show(supportFragmentManager, "LoadDialog")
     }
 }
